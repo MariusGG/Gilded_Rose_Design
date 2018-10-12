@@ -4,8 +4,8 @@ class GildedRose
       @items = items
   end
 
-  def item_limit
-    
+  def item_limit #boundary checker
+      item.quality
   end
 
 
@@ -21,9 +21,11 @@ class GildedRose
           item.quality += 2
         end
 
-        item.quality = item.quality if item.quality <= 50
-
         item.sell_in -= 1
+        if item.quality > 50
+          item.quality = 50
+        end
+
         when "Backstage passes to a TAFKAL80ETC concert"
           item.quality = if item.sell_in > 10
             item.quality + 1
